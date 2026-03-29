@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { enhanceImage } from '@/lib/ai/replicate';
+import { enhanceImage } from '@/lib/ai/gemini';
 import { createClient } from '@/lib/supabase/server';
 
 export async function POST(request: NextRequest) {
@@ -19,7 +19,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '缺少参数' }, { status: 400 });
     }
 
-    const enhancedUrl = await enhanceImage({ imageUrl, mood, style });
+    // Fetch the image and convert to base64
+    const imageRes = await fetch(imageUrl);
+    const arrayBuffer = await imageRes.arrayBuffer();
+    const imageBase64 = Buffer.from(arrayBuffer).toString('base64');
+    const mimeType = imageRes.headers.get('content-type') || 'image/jpeg';
+
+    const enhancedBuffer = await enhanceImage({
+      imageBase64,
+      mimeType,
+      mood,
+      style,
+    });
+
+    // Return as data URL so the frontend can use it directly
+    const enhancedBase64 = enhancedBuffer.toString('base64');
+    const enhancedUrl = `data:image/png;base64,${enhancedBase64}`;
 
     return NextResponse.json({ enhancedUrl });
   } catch (error) {

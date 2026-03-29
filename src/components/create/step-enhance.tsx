@@ -5,7 +5,7 @@ import { useCreateFlowStore } from '@/stores/create-flow-store';
 import { FILTER_PRESETS, getPresetsForMood } from '@/lib/filters/presets';
 import { applyFilter, canvasToBlob, generateFilterThumbnail } from '@/lib/filters/engine';
 import { getMoodConfig } from '@/lib/constants';
-import { ENHANCE_STYLES } from '@/lib/ai/replicate';
+import { ENHANCE_STYLES } from '@/lib/ai/gemini';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, Sparkles, Loader2, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';

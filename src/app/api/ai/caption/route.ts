@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateCaption } from '@/lib/ai/claude';
+import { generateCaption } from '@/lib/ai/gemini';
 import { buildCaptionPrompt } from '@/lib/ai/prompts';
 import type { MoodType } from '@/types/mood';
 
