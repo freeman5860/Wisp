@@ -5,15 +5,17 @@ import { useRouter } from 'next/navigation';
 import { MoodBadge } from '@/components/mood-card/mood-badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ArrowLeft, MapPin, Share2, Trash2, Download } from 'lucide-react';
+import { ArrowLeft, MapPin, Share2, Trash2, Download, FolderPlus } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { toast } from 'sonner';
+import { AddToCollectionModal } from '@/components/collections/add-to-collection-modal';
 import type { MoodCard } from '@/types/card';
 
 export function CardDetail({ id }: { id: string }) {
   const router = useRouter();
   const [card, setCard] = useState<MoodCard | null>(null);
   const [loading, setLoading] = useState(true);
+  const [collectionModalOpen, setCollectionModalOpen] = useState(false);
 
   useEffect(() => {
     fetch(`/api/cards/${id}`)
@@ -132,15 +134,25 @@ export function CardDetail({ id }: { id: string }) {
             <Share2 className="w-4 h-4 mr-1.5" />
             分享
           </Button>
+          <Button variant="secondary" size="sm" onClick={() => setCollectionModalOpen(true)}>
+            <FolderPlus className="w-4 h-4 mr-1.5" />
+            收藏
+          </Button>
           <Button variant="secondary" size="sm" onClick={handleDownload}>
             <Download className="w-4 h-4 mr-1.5" />
-            下载卡片
+            下载
           </Button>
           <Button variant="ghost" size="sm" onClick={handleDelete}>
             <Trash2 className="w-4 h-4 mr-1.5" />
             删除
           </Button>
         </div>
+
+        <AddToCollectionModal
+          open={collectionModalOpen}
+          onClose={() => setCollectionModalOpen(false)}
+          cardId={id}
+        />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { href: '/explore', icon: Compass, label: '探索' },
   { href: '/create', icon: Plus, label: '记录' },
   { href: '/map', icon: Map, label: '地图' },
-  { href: '/my-cards', icon: User, label: '我的' },
+  { href: '/profile', icon: User, label: '我的' },
 ];
 
 export function Navbar() {

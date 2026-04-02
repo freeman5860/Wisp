@@ -31,10 +31,12 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Redirect unauthenticated users to login for protected routes
-  const protectedPaths = ['/create', '/my-cards'];
-  const isProtected = protectedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  );
+  const protectedPrefixes = ['/create', '/my-cards', '/insights', '/collections'];
+  const protectedExact = ['/profile'];
+  const pathname = request.nextUrl.pathname;
+  const isProtected =
+    protectedPrefixes.some((path) => pathname.startsWith(path)) ||
+    protectedExact.some((path) => pathname === path);
 
   if (!user && isProtected) {
     const url = request.nextUrl.clone();
