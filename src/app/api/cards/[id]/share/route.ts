@@ -150,7 +150,7 @@ export async function GET(
           React.createElement(
             'span',
             { style: { fontSize: 16, color: 'rgba(255,255,255,0.5)' } },
-            card.location_name ? `📍 ${card.location_name}` : ''
+            ''
           ),
           React.createElement(
             'span',

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { MoodBadge } from '@/components/mood-card/mood-badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ArrowLeft, MapPin, Share2, Trash2, Download, FolderPlus } from 'lucide-react';
+import { ArrowLeft, Share2, Trash2, Download, FolderPlus } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { toast } from 'sonner';
 import { AddToCollectionModal } from '@/components/collections/add-to-collection-modal';
@@ -116,12 +116,6 @@ export function CardDetail({ id }: { id: string }) {
               {card.caption}
             </p>
             <div className="flex items-center justify-between mt-3">
-              {card.location_name && (
-                <span className="flex items-center gap-1 text-xs text-white/60">
-                  <MapPin className="w-3 h-3" />
-                  <span className="truncate max-w-[180px]">{card.location_name}</span>
-                </span>
-              )}
               <span className="text-xs text-white/40">
                 {formatDate(card.created_at)}
               </span>

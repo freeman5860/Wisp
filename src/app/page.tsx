@@ -36,7 +36,7 @@ export default function HomePage() {
             {APP_DESCRIPTION}
           </p>
           <p className="mt-2 text-sm text-text-tertiary">
-            随手拍 · AI 渲染氛围 · 生成情绪文案 · 标记在地图上
+            随手拍 · AI 渲染氛围 · 生成情绪文案
           </p>
 
           <div className="flex items-center justify-center gap-4 mt-10">
@@ -47,10 +47,10 @@ export default function HomePage() {
               开始记录
             </Link>
             <Link
-              href="/map"
+              href="/explore"
               className="inline-flex items-center h-12 px-8 border border-border text-text-secondary font-medium rounded-md hover:bg-background-hover hover:border-border-bright transition-all duration-200"
             >
-              探索地图
+              探索卡片
             </Link>
           </div>
         </div>
@@ -76,8 +76,8 @@ export default function HomePage() {
               },
               {
                 step: '03',
-                title: '留在当地',
-                desc: '发布到地图上。你也可以看看别人在同一个地方留下的情绪。',
+                title: '分享',
+                desc: '发布你的情绪卡片，也可以看看别人此刻的心情。',
               },
             ].map((item) => (
               <div key={item.step} className="text-center">

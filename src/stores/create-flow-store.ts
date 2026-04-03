@@ -13,9 +13,6 @@ interface CreateFlowState {
   filteredPreviewUrl: string | null;
   caption: string | null;
   captionLoading: boolean;
-  latitude: number | null;
-  longitude: number | null;
-  locationName: string | null;
   isPublic: boolean;
   publishing: boolean;
 
@@ -25,7 +22,6 @@ interface CreateFlowState {
   setFilter: (filterId: string, blob: Blob) => void;
   setCaption: (caption: string) => void;
   setCaptionLoading: (loading: boolean) => void;
-  setLocation: (lat: number, lng: number, name?: string) => void;
   setIsPublic: (isPublic: boolean) => void;
   setPublishing: (publishing: boolean) => void;
   nextStep: () => void;
@@ -46,9 +42,6 @@ export const useCreateFlowStore = create<CreateFlowState>((set, get) => ({
   filteredPreviewUrl: null,
   caption: null,
   captionLoading: false,
-  latitude: null,
-  longitude: null,
-  locationName: null,
   isPublic: true,
   publishing: false,
 
@@ -84,8 +77,6 @@ export const useCreateFlowStore = create<CreateFlowState>((set, get) => ({
 
   setCaption: (caption) => set({ caption }),
   setCaptionLoading: (loading) => set({ captionLoading: loading }),
-  setLocation: (lat, lng, name) =>
-    set({ latitude: lat, longitude: lng, locationName: name || null }),
   setIsPublic: (isPublic) => set({ isPublic }),
   setPublishing: (publishing) => set({ publishing }),
 
@@ -123,9 +114,6 @@ export const useCreateFlowStore = create<CreateFlowState>((set, get) => ({
       filteredPreviewUrl: null,
       caption: null,
       captionLoading: false,
-      latitude: null,
-      longitude: null,
-      locationName: null,
       isPublic: true,
       publishing: false,
     });

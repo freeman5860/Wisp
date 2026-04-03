@@ -12,9 +12,6 @@ const createCardSchema = z.object({
   ]),
   filter_id: z.string().nullable().optional(),
   caption: z.string().min(1).max(200),
-  latitude: z.number().nullable().optional(),
-  longitude: z.number().nullable().optional(),
-  location_name: z.string().nullable().optional(),
   is_public: z.boolean().default(true),
 });
 

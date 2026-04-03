@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Plus, Map, User, LogOut, Compass } from 'lucide-react';
+import { Plus, User, LogOut, Compass } from 'lucide-react';
 import { APP_NAME } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils';
 const NAV_ITEMS = [
   { href: '/explore', icon: Compass, label: '探索' },
   { href: '/create', icon: Plus, label: '记录' },
-  { href: '/map', icon: Map, label: '地图' },
   { href: '/profile', icon: User, label: '我的' },
 ];
 

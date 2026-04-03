@@ -1,13 +1,11 @@
 'use client';
 
 import { useCreateFlowStore } from '@/stores/create-flow-store';
-import { useGeolocation } from '@/hooks/use-geolocation';
 import { MoodBadge } from '@/components/mood-card/mood-badge';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, MapPin, Send, Globe, Lock, Loader2, RefreshCw } from 'lucide-react';
+import { ChevronLeft, Send, Globe, Lock, Loader2, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 export function StepPreview() {
@@ -19,7 +17,6 @@ export function StepPreview() {
     captionLoading,
     isPublic,
     setIsPublic,
-    setLocation,
     setCaption,
     setCaptionLoading,
     publishing,
@@ -27,21 +24,9 @@ export function StepPreview() {
     prevStep,
     filteredImageBlob,
     imageFile,
-    latitude,
-    longitude,
-    locationName,
     filterId,
     reset,
   } = useCreateFlowStore();
-
-  const { location } = useGeolocation();
-
-  // Sync geolocation
-  useEffect(() => {
-    if (location) {
-      setLocation(location.latitude, location.longitude, location.locationName);
-    }
-  }, [location, setLocation]);
 
   const handleRefreshCaption = async () => {
     if (!mood) return;
@@ -91,9 +76,6 @@ export function StepPreview() {
           mood,
           filter_id: filterId,
           caption,
-          latitude,
-          longitude,
-          location_name: locationName,
           is_public: isPublic,
         }),
       });
@@ -142,12 +124,6 @@ export function StepPreview() {
             </div>
           ) : (
             <p className="text-white text-lg font-light leading-relaxed">{caption}</p>
-          )}
-          {locationName && (
-            <span className="flex items-center gap-1 text-xs text-white/60 mt-2">
-              <MapPin className="w-3 h-3" />
-              {locationName}
-            </span>
           )}
         </div>
       </div>

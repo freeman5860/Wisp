@@ -1,6 +1,5 @@
 'use client';
 
-import { MapPin } from 'lucide-react';
 import { MoodBadge } from './mood-badge';
 import { cn } from '@/lib/utils';
 import { formatDate } from '@/lib/utils';
@@ -45,12 +44,6 @@ export function MoodCard({ card, onClick, className }: MoodCardProps) {
           {card.caption}
         </p>
         <div className="flex items-center justify-between mt-2">
-          {card.location_name && (
-            <span className="flex items-center gap-1 text-xs text-white/60">
-              <MapPin className="w-3 h-3" />
-              <span className="truncate max-w-[150px]">{card.location_name}</span>
-            </span>
-          )}
           <span className="text-xs text-white/40">
             {formatDate(card.created_at)}
           </span>
