@@ -54,7 +54,7 @@ export async function enhanceImage(options: EnhanceOptions): Promise<Buffer> {
         image_b64: imageBase64,
         strength: 0.65,
         guidance: 7.5,
-        num_steps: 30,
+        num_steps: 20,
       }),
     }
   );
