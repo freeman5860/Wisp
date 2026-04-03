@@ -117,11 +117,21 @@ export function StepEnhance() {
     setAiEnhancing(true);
     setAiMode(true);
     try {
+      // Convert blob URL to base64 for server-side processing
+      const blobRes = await fetch(imagePreviewUrl);
+      const blob = await blobRes.blob();
+      const mimeType = blob.type || 'image/jpeg';
+      const arrayBuffer = await blob.arrayBuffer();
+      const imageBase64 = btoa(
+        new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
+      );
+
       const res = await fetch('/api/ai/enhance', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          imageUrl: imagePreviewUrl,
+          imageBase64,
+          mimeType,
           mood,
           style: aiStyle,
         }),
@@ -132,9 +142,9 @@ export function StepEnhance() {
       setAiResultUrl(data.enhancedUrl);
 
       // Fetch enhanced image as blob and set it as the filter result
-      const imgRes = await fetch(data.enhancedUrl);
-      const blob = await imgRes.blob();
-      setFilter(`ai-${aiStyle}`, blob);
+      const enhancedRes = await fetch(data.enhancedUrl);
+      const enhancedBlob = await enhancedRes.blob();
+      setFilter(`ai-${aiStyle}`, enhancedBlob);
 
       toast.success('AI 增强完成！');
     } catch {

@@ -13,21 +13,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '未登录' }, { status: 401 });
     }
 
-    const { imageUrl, mood, style } = await request.json();
+    const { imageBase64, mimeType, mood, style } = await request.json();
 
-    if (!imageUrl || !mood) {
+    if (!imageBase64 || !mood) {
       return NextResponse.json({ error: '缺少参数' }, { status: 400 });
     }
 
-    // Fetch the image and convert to base64
-    const imageRes = await fetch(imageUrl);
-    const arrayBuffer = await imageRes.arrayBuffer();
-    const imageBase64 = Buffer.from(arrayBuffer).toString('base64');
-    const mimeType = imageRes.headers.get('content-type') || 'image/jpeg';
-
     const enhancedBuffer = await enhanceImage({
       imageBase64,
-      mimeType,
+      mimeType: mimeType || 'image/jpeg',
       mood,
       style,
     });
