@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { enhanceImage } from '@/lib/ai/gemini';
+import { enhanceImage } from '@/lib/ai/cloudflare';
 import { createClient } from '@/lib/supabase/server';
 
 export async function POST(request: NextRequest) {
